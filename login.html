@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In - App Name</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background: #fff;
+            border-radius: 12px;
+            padding: 40px;
+            width: 380px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        /* Logo container (replaces black dot with image) */
+        .logo-container {
+            margin-bottom: 24px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .heading {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #000;
+        }
+
+        .subheading {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 24px;
+        }
+
+        .social-btn {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #fff;
+            cursor: pointer;
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .social-btn:hover {
+            background: #f9f9f9;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #aaa;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .divider:not(:empty)::before {
+            margin-right: 10px;
+        }
+        .divider:not(:empty)::after {
+            margin-left: 10px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            font-size: 14px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #000;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 16px;
+        }
+
+        .forgot-link {
+            color: #007aff;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #222;
+        }
+
+        .signup-link {
+            margin-top: 16px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .signup-link a {
+            color: #007aff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-container">
+            <!-- Replace the image path below with your own -->
+            <div class="logo-icon">
+                <img src="C:\Users\SAIKAT\Downloads\transport-line-icon-quality-icon-mobile-web_720607-9542.jpg" alt="App Logo">
+            </div>
+        </div>
+
+        <h1 class="heading">Welcome Back!</h1>
+        <p class="subheading">Let's get you signed in securely.</p>
+
+        <button class="social-btn" onclick="handleGoogleLogin()">
+            <span class="social-icon">
+                <img src="D:\MINI PROJECT 3RD YEAR\google-logo-icon-gsuite-hd-701751694791470gzbayltphh.png" alt="Google" style="width:18px;height:18px;">
+            </span>
+            Continue with Google
+        </button>
+
+        <button class="social-btn" onclick="handleFacebookLogin()">
+            <span class="social-icon">
+                <img src="facebook-logo.png" alt="Facebook" style="width:18px;height:18px;">
+            </span>
+            Continue with Facebook
+        </button>
+
+        <div class="divider">Or</div>
+
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <input type="email" class="form-input" placeholder="Enter Your Email Address" required />
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="password" class="form-input" placeholder="Your Password" required />
+            </div>
+
+            <div class="forgot-password">
+                <a href="#" class="forgot-link">Forgot Your Password?</a>
+            </div>
+
+            <button type="submit" class="submit-btn">Log in with Email</button>
+        </form>
+
+        <div class="signup-link">
+            Don't Have an Account? <a href="signup.html">Sign Up</a>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            alert('Login functionality would be implemented here');
+        }
+
+        function handleGoogleLogin() {
+            alert('Google OAuth would be implemented here');
+        }
+
+        function handleFacebookLogin() {
+            alert('Facebook OAuth would be implemented here');
+        }
+    </script>
+</body>
+</html>
